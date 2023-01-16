@@ -1,0 +1,26 @@
+name: Spin regression tests
+
+on:
+  push: {}
+
+jobs:
+  spin-login:
+    uses: "./.github/workflows/auth.yml"
+    secrets:
+      gh_username: ${{ secrets.E2E_GH_USERNAME }}
+      gh_password: ${{ secrets.E2E_GH_PASSWORD }}
+      gh_totp_secret: ${{ secrets.E2E_GH_TOTP_SECRET }}
+
+  spin-windows:
+    runs-on: ubuntu-22.04
+    needs: spin-login
+    steps:
+      - name: Retrieve saved Spin Binary
+        uses: actions/download-artifact@v3
+        with:
+          name: spin-fermyon-cloud-config.json
+          path: /home/runner/.config/fermyon/
+
+      - name: cat secret 2
+        run: |
+          cat /home/runner/.config/fermyon/config.json
