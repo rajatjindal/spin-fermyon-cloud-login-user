@@ -5,7 +5,7 @@ on:
 
 jobs:
   spin-login:
-    uses: "rajatjindal/spin-fermyon-cloud-login/.github/workflows/auth.yml"
+    uses: "rajatjindal/spin-fermyon-cloud-login/.github/workflows/auth.yml@main"
     secrets:
       gh_username: ${{ secrets.E2E_GH_USERNAME }}
       gh_password: ${{ secrets.E2E_GH_PASSWORD }}
